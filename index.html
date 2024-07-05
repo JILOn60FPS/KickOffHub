@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kick Off Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.3/dist/vue-router.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #000; /* Black text */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #a80505; /* DodgerBlue */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header img {
+            height: 50px;
+            margin-left: 20px;
+        }
+        nav {
+            margin-right: 20px;
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0 0 20px 0;
+        }
+        p {
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #a80505; /* DodgerBlue */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .main-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div style="display: flex; align-items: center;">
+                <img :src="logoUrl" alt="Kick Off Hub Logo">
+                <h1>{{ title }}</h1>
+            </div>
+            <nav>
+                <router-link to="/">Home</router-link>
+                <router-link to="/contact">Contact</router-link>
+                <router-link to="/football-stats">Football Stats</router-link>
+                <router-link to="/live-feed">Live Feed</router-link>
+                <router-link to="/upcoming-matches">Upcoming Matches</router-link>
+            </nav>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+        <footer>
+            <p>&copy; 2024 {{ title }}. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Home component
+        const Home = {
+            template: `
+                <div>
+                    <h2>{{ welcomeMessage }}</h2>
+                    <p>{{ aboutMessage }}</p>
+                    <img :src="mainImageUrl"alt="Sports Image" class="main-image">
+                </div>
+            `,
+            data() {
+                return {
+                    welcomeMessage: 'Welcome to Kick Off Hub!',
+                    aboutMessage: 'Kick Off Hub is your ultimate destination for all things sports. Whether you\'re looking for the latest news, in-depth analysis, or community discussions, we\'ve got you covered. Join us and be a part of the action!',
+                    mainImageUrl: 'https://s.yimg.com/ny/api/res/1.2/PUmPrYj82bew07AvsZhi8A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3MQ--/https://media.zenfs.com/en/the_independent_635/dff509014a7f745a9d6da9ebf22427e6' // Replace with your main image URL
+                };
+            }
+        };
+
+        // Contact component
+        const Contact = {
+            template: `
+                <div>
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions or feedback, feel free to reach out to us at contact@kickoffhub.com.</p>
+                </div>
+            `
+        };
+
+        // Football Stats component
+        const FootballStats = {
+            template: `
+                <div>
+                    <h2>Football Stats</h2>
+                    <p>Stay tuned for the latest football stats.</p>
+                </div>
+            `
+        };
+
+        // Live Feed component
+        const LiveFeed = {
+            template: `
+                <div>
+                    <h2>Live Feed</h2>
+                    <p>Catch the live action here!</p>
+                </div>
+            `
+        };
+
+        // Upcoming Matches component
+        const UpcomingMatches = {
+            template: `
+                <div>
+                    <h2>Upcoming Matches</h2>
+                    <p>Check out the schedule for upcoming matches.</p>
+                </div>
+            `
+        };
+
+        // Vue Router setup
+        const routes = [
+            { path: '/', component: Home },
+            { path: '/contact', component: Contact },
+            { path: '/football-stats', component: FootballStats },
+            { path: '/live-feed', component: LiveFeed },
+            { path: '/upcoming-matches', component: UpcomingMatches }
+        ];
+
+        const router = new VueRouter({
+            routes
+        });
+
+        // Vue instance
+        new Vue({
+            el: '#app',
+            router,
+            data: {
+                title: 'Kick Off Hub',
+                logoUrl: 'https://via.placeholder.com/150' // Replace with your logo URL
+            }
+        });
+    </script>
+</body>
+</html>
